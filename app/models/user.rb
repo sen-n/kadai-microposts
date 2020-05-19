@@ -34,9 +34,10 @@ class User < ApplicationRecord
     Micropost.where(user_id: self.following_ids + [self.id])
   end
   
+     
   def favorite(other_micropost)
     unless self == other_micropost
-     self.favorite.find_or_create_by(micropost_id: other_micropost.id)
+     self.favorites.find_or_create_by(micropost_id: other_micropost.id)
     end
   end
   
@@ -46,7 +47,7 @@ class User < ApplicationRecord
   end  
   
   def favorite?(other_micropost)
-    self.favorites.include?(other_micropost)
+    self.likes.include?(other_micropost)
   end
   
 end
